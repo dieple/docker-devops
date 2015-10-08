@@ -29,9 +29,15 @@ RUN apt-get -y install vim git sudo zip bzip2 fontconfig curl
 RUN apt-get -y install maven
 
 # install node.js from PPA
-RUN add-apt-repository ppa:chris-lea/node.js
-RUN apt-get update
-RUN apt-get -y install nodejs
+#RUN add-apt-repository ppa:chris-lea/node.js
+#RUN apt-get update
+#RUN apt-get -y install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
+    apt-get -y install nodejs && \
+    apt-get clean &&\
+    rm -rf /var/lib/dpkg/info/* &&\
+    rm -rf /var/lib/apt
+
 
 # install yeoman
 RUN npm install -g yo
