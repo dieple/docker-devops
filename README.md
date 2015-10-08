@@ -11,7 +11,7 @@ docker pull dieple/docker-devops
 
 Once the image is downloaded, you will need to run your application inside the container and forward all local ports exposed (8080 for tomcat, 9000 and 35729 for grunt, 22 for ssh and 3606 for mysql). Try running the following command  and don’t forget to change “your_app_folder” to your local path:
 
-sudo docker run -v /apps/sanboxes:/apps -p 8080:8080 -p 9000:9000 -p 35729:35729 -p 4022:22 -p 3306:3306 -t -i dieple/docker-devops /bin/bash
+sudo docker run -v /apps/sandboxes:/apps -p 8080:8080 -p 9000:9000 -p 35729:35729 -p 4022:22 -p 3306:3306 -t -i dieple/docker-devops /bin/bash
 
 Finally you will need to run the script in /usr/local/bin, to start the mysql service and run the application using the production profile.
 
