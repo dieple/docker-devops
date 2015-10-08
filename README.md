@@ -31,9 +31,9 @@ If you would like to see any change on the client side and reload your web appli
 
 * Open a new terminal
 * Get your container ID or name
-** List your active containers by running:
+**List your active containers by running:
   sudo docker ps
-** Copy the container Id or the name
+**Copy the container Id or the name
 * Access your container:
   sudo docker exec -i -t CONTAINER_ID bash
 * Start grunt serve task:
