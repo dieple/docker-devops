@@ -37,7 +37,7 @@ RUN apt-get -y install nodejs
 RUN npm install -g yo
 
 # install JHipster
-RUN npm install -g generator-jhipster@1.10.2
+RUN npm install -g generator-jhipster@2.21.1
 
 # Install Bower & Grunt
 RUN npm install -g bower grunt-cli
@@ -68,12 +68,14 @@ COPY script.sh /usr/local/bin/
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
 
 # Define working directory.
-VOLUME ["/apps"]
-WORKDIR /apps
+USER devops
+VOLUME ["/apps/sandboxes"]
+WORKDIR /apps/sandboxes
 
 # expose the working directory, the Tomcat port, the Grunt server port, Mysql, the SSHD port, and run SSHD
 EXPOSE 8080
-EXPOSE 9000
+EXPOSE 3000
+EXPOSE 3001
 EXPOSE 3306
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
