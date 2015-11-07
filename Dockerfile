@@ -7,10 +7,10 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/
 RUN apt-get -y update
 
 # install python-software-properties (so you can do add-apt-repository)
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-properties software-properties-common
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-properties software-properties-common && apt-get clean
 
 # install SSH server so we can connect multiple times to the container
-RUN apt-get -y install openssh-server && mkdir /var/run/sshd
+RUN apt-get -y install openssh-server && mkdir /var/run/sshd && apt-get clean
 
 # install oracle java from PPA
 RUN add-apt-repository ppa:webupd8team/java -y
@@ -23,16 +23,16 @@ RUN update-java-alternatives -s java-8-oracle
 RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
 
 # install utilities
-RUN apt-get -y install vim git sudo zip bzip2 fontconfig curl
+RUN apt-get -y install vim git sudo zip bzip2 fontconfig curl && apt-get clean
 
 # install maven
-RUN apt-get -y install maven
+RUN apt-get -y install maven && apt-get clean
 
 # install node.js from PPA
 #RUN add-apt-repository ppa:chris-lea/node.js
 #RUN apt-get update
 #RUN apt-get -y install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
     apt-get -y install nodejs && \
     apt-get clean &&\
     rm -rf /var/lib/dpkg/info/* &&\
@@ -43,7 +43,7 @@ RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
 RUN npm install -g yo
 
 # install JHipster
-RUN npm install -g generator-jhipster@2.21.1
+RUN npm install -g generator-jhipster@2.23.0
 
 # Install Bower & Grunt
 RUN npm install -g bower grunt-cli
@@ -75,8 +75,8 @@ VOLUME ["/etc/mysql", "/var/lib/mysql"]
 
 # Define working directory.
 USER devops
-VOLUME ["/apps/sandboxes"]
-WORKDIR /apps/sandboxes
+VOLUME ["$HOME/sandboxes"]
+WORKDIR $HOME/sandboxes
 
 # expose the working directory, the Tomcat port, the Grunt server port, Mysql, the SSHD port, and run SSHD
 EXPOSE 8080
