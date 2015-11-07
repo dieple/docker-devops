@@ -75,8 +75,8 @@ VOLUME ["/etc/mysql", "/var/lib/mysql"]
 
 # Define working directory.
 USER devops
-VOLUME ["$HOME/sandboxes"]
-WORKDIR $HOME/sandboxes
+VOLUME ["/sandboxes"]
+WORKDIR /sandboxes
 
 # expose the working directory, the Tomcat port, the Grunt server port, Mysql, the SSHD port, and run SSHD
 EXPOSE 8080
