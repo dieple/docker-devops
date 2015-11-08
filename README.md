@@ -9,17 +9,21 @@ to obtain the docker image run this command:
 
 docker pull dieple/docker-devops
 
+then execute: 
+
+cd /home/ubuntu/sandboxes
+git clone https://github.com/dieple/jhipster-2.23.0.git jhipster
+
+
 Once the image is downloaded, you will need to run your application inside the container and forward all local ports exposed (8080 for tomcat, 3000 and 3001 for grunt, 22 for ssh and 3606 for mysql). Try running the following command  and don’t forget to change “your_app_folder” to your local path:
 
-sudo docker run -v /home/ubuntu/sandboxes/jhipster:/sandboxes -p 8080:8080 -p 3000:3000 -p 3001:3001 -p 4022:22 -p 3306:3306 -t -i dieple/docker-devops /bin/bash
+
+sudo docker run -v /home/ubuntu/sandboxes/jhipster:/jhipster -p 8080:8080 -p 3000:3000 -p 3001:3001 -p 4022:22 -p 3306:3306 -t -i dieple/awsctl /bin/bash
 
 Finally you will need to run the script in /usr/local/bin, to start the mysql service and run the application using the production profile.
 
-
+run this command once you ssh inside your container:
 sudo sh /usr/local/bin/script.sh
-sudo chown devops /sandboxes
-cd /sandboxes
-yo jhipster
 
 # Change the database name
 

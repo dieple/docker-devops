@@ -74,9 +74,13 @@ COPY script.sh /usr/local/bin/
 VOLUME ["/etc/mysql", "/var/lib/mysql"]
 
 # Define working directory.
-USER devops
-VOLUME ["/sandboxes"]
-WORKDIR /sandboxes
+VOLUME ["/jhipster"]
+WORKDIR /jhipster
+#USER devops
+#RUN cd /home/devops \
+#	&& git clone https://github.com/dieple/jhipster-2.23.0.git jhipster \
+#	&& cd /home/devops/jhipster \
+#	&& mvn spring-boot:run
 
 # expose the working directory, the Tomcat port, the Grunt server port, Mysql, the SSHD port, and run SSHD
 EXPOSE 8080
